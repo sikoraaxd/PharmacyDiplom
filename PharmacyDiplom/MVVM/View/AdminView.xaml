@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="PharmacyDiplom.MVVM.View.AdminView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PharmacyDiplom.MVVM.View"
+             xmlns:viewModel="clr-namespace:PharmacyDiplom.MVVM.ViewModel"
+             xmlns:view="clr-namespace:PharmacyDiplom.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="920">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <RadioButton Content="Лекарства"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding AdminPharmsViewCommand}"/>
+
+            <RadioButton Content="Пользователи"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding AdminUsersViewCommand}"/>
+            <RadioButton    Content="История покупок"
+                            Height="50"
+                            Foreground="White"
+                            FontSize="14"
+                            Style="{StaticResource MenuButtonTheme}"
+                            Command="{Binding AdminHistoryViewCommand}"/>
+        </StackPanel>
+        <ContentControl Grid.Column="1"
+                        Content="{Binding CurrentAdminView}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewModel:AdminPharmsViewModel}">
+                    <view:AdminPharmsView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModel:AdminUsersViewModel}">
+                    <view:AdminUsersView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModel:AdminHistoryViewModel}">
+                    <view:AdminHistoryView/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
+</UserControl>

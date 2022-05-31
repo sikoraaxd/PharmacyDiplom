@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="PharmacyDiplom.MVVM.View.MainPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModel="clr-namespace:PharmacyDiplom.MVVM.ViewModel"
+             xmlns:view="clr-namespace:PharmacyDiplom.MVVM.View"
+             xmlns:local="clr-namespace:PharmacyDiplom.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="920">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Аптека"
+                   VerticalAlignment="Center"
+                   Margin="30,0,0,0"
+                   Foreground="White"
+                   FontSize="22"/>
+
+        <Border Background="Transparent"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BorderThickness="0,0,0,2"
+                    BorderBrush="Gray">
+            <StackPanel 
+                        Orientation="Horizontal">
+                <Grid Width="720">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="110"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Width="250"
+                     Height="40"
+                     VerticalContentAlignment="Center"
+                     HorizontalAlignment="Left"
+                     Margin="5"
+                     Style="{StaticResource ModernTextBox}"/>
+
+                    <Button Width="40"
+                        Height="40"
+                        HorizontalAlignment="Left"
+                        Margin="0,0,20,0"
+                        BorderThickness="0"
+                        Background="Transparent"
+                        Grid.Column="1"
+                        Command="{Binding CartCommand}">
+                        <Image Width="30" Height="30" Margin="0,0,0,3" Source="/Images/ShopCart.png"/>
+                    </Button>
+
+                    <Button Width="40"
+                        Height="40"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,20,0"
+                        BorderThickness="0"
+                        Background="Transparent"
+                        Grid.Column="1"
+                        Command="{Binding AuthCommand}">
+                        <Image Width="30" Height="30" Source="https://img.icons8.com/ios-glyphs/344/ffffff/change-user-male.png"/>
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <RadioButton Content="Главная"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand}"/>
+
+            <RadioButton Content="Лекарства"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding PharmsViewCommand}"/>
+        </StackPanel>
+        <ContentControl Grid.Row="1" Grid.Column="1"
+                        Content="{Binding CurrentMainPageView}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                    <view:HomeView/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewModel:PharmsViewModel}">
+                    <view:PharmsView/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
+</UserControl>
